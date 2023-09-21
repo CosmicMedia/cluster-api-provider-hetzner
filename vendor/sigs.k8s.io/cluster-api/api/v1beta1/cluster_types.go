@@ -386,6 +386,9 @@ type APIEndpoint struct {
 
 	// The port on which the API server is serving.
 	Port int32 `json:"port"`
+
+	// Whether the cluster will use the IPv6 address
+	IPv6Only bool `json:"ipv6Only"`
 }
 
 // IsZero returns true if both host and port are zero values.

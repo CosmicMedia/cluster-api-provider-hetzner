@@ -210,7 +210,9 @@ func (r *HetznerClusterReconciler) reconcileNormal(ctx context.Context, clusterS
 					Port: defaultPort,
 				}
 			} else {
-				if hetznerCluster.Spec.ControlPlaneEndpoint.Host == "" {
+				if hetznerCluster.Spec.ControlPlaneEndpoint.Host == "" && hetznerCluster.Spec.ControlPlaneEndpoint.IPv6Only {
+					hetznerCluster.Spec.ControlPlaneEndpoint.Host = hetznerCluster.Status.ControlPlaneLoadBalancer.IPv6
+				} else {
 					hetznerCluster.Spec.ControlPlaneEndpoint.Host = defaultHost
 				}
 				if hetznerCluster.Spec.ControlPlaneEndpoint.Port == 0 {
