@@ -383,11 +383,6 @@ func (s *Service) createServer(ctx context.Context) (*hcloud.Server, error) {
 		}}
 	}
 
-	// if no private network exists, there must be an IPv4 for the load balancer
-	if !s.scope.HetznerCluster.Spec.HCloudNetwork.Enabled {
-		opts.PublicNet.EnableIPv4 = true
-	}
-
 	// Create the server
 	server, err := s.scope.HCloudClient.CreateServer(ctx, opts)
 	if err != nil {
